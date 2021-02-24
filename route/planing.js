@@ -6,11 +6,18 @@ const { insert, find } = require('./crud')
 const route = express.Router()
 
 route.post('/admin/planing/insert', async(req, res) => {
-  const result = await insert(planingModel, req.body)
-  res.send({
-    code: 200,
-    message: 'success'
-  })
+  try{
+    const result = await insert(planingModel, req.body)
+    res.send({
+      code: 200,
+      message: 'success'
+    })
+  }catch (err) {
+    res.send({
+      code: 2101,
+      message: err
+    })
+  }
 })
 
 route.get('/admin/planing/list', async (req, res) => {

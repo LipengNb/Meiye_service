@@ -1,8 +1,13 @@
 module.exports = {
   insert(collectionName, insertData) {
     return new Promise((resolve, reject) => {
-      collectionName.insertMany(insertData, err => {
-        if (err) throw err
+      collectionName.insertMany(insertData, error => {
+        if (error) {
+          const err = error.errors
+          for (let attr in err) {
+            reject(err[attr]['message'])
+          }
+        }
         resolve()
       })
     })
