@@ -12,8 +12,9 @@ module.exports = {
       })
     })
   },
-  delete(collectionName, deleteData, deleteType = 'deleteOne') {
+  deletes(collectionName, deleteData, deleteType = 'deleteOne') {
     return new Promise((resolve, reject) => {
+      console.log(deleteType)
       collectionName[deleteType](deleteData, (err) => {
         if (err) throw err
         resolve()

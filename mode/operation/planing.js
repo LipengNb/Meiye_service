@@ -20,14 +20,15 @@ const planingScheme = new Scheme({
     type: Number,
     required: [true, '请填写可用次数']
   },
-  num: {
+  quota: {
     type: Number,
     required: [true, '请填写活动限额']
   },
-  term: {
+  isDate: {
     type: String,
-    required: [true, '请填写活动期限']
+    required: [ true, '请选择时间限制']
   },
+  date: String,
   create_time: {
     type: Date,
     default: Date.now()
