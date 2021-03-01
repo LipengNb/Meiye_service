@@ -1,12 +1,12 @@
 const express = require('express')
 const app = express()
-const mongoose = require('../mode/db')
-const planingModel = require('../mode/operation/planing')
-const { insert, find, deletes, update } = require('./crud')
+const mongoose = require('../../mode/db')
+const planingModel = require('../../mode/operation/planing')
+const { insert, find, deletes, update } = require('../crud')
 const route = express.Router()
 
 route.get('/admin/planing/list', async (req, res) => {
-  const result = await find(planingModel, { name: req.query.name })
+  const result = await find(planingModel, req.query )
   res.send({
     code: 200,
     data: result,

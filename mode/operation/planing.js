@@ -29,6 +29,7 @@ const planingScheme = new Scheme({
     required: [ true, '请选择时间限制']
   },
   date: Array,
+  isEnable: Number,
   create_time: {
     type: Date,
     default: Date.now()

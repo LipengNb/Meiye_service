@@ -31,7 +31,15 @@ module.exports = {
   },
   find (collectionName, whereObj, showObj) {
     return new Promise((resolve, reject) => {
-      collectionName.find(whereObj, showObj).exec((err, data) => {
+      const query = {}
+      if (whereObj) {
+        for (const key in whereObj) {
+          if (whereObj[key] != '') {
+            query[key] = whereObj[key]
+          }
+        }
+      }
+      collectionName.find(query, showObj).exec((err, data) => {
         if (err) throw err;
         resolve(data)
       })
