@@ -12,5 +12,9 @@ module.exports = (app) => {
   app.post('/admin/label/:reset', require('./operation/label')),
   // 折扣管理
   app.get('/admin/discount/:reset', require('./operation/discount')),
-  app.post('/admin/discount/:reset', require('./operation/discount'))
+  app.post('/admin/discount/:reset', require('./operation/discount')),
+  // --------------- 系统管理 ---------------
+  app.get('/admin/staff/:reset', require('./system/staff')),
+  app.post('/admin/staff/:reset', require('./system/staff'))
+
 }

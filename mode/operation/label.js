@@ -2,7 +2,6 @@ const mongoose = require('../db')
 
 const Scheme = mongoose.Schema;
 
-
 const labelScheme = new Scheme({
   name: {
     type: String,

@@ -18,10 +18,13 @@ const memberScheme = new Scheme({
     required: [true, '请选择折扣'],
     type: mongoose.SchemaTypes.ObjectId, ref: 'discounts'
   },
+  lastConsume: String,
   payment: String,
-  labels: {
-    type: mongoose.SchemaTypes.Array, ref: 'labels'
-  },
+  labels: [
+    {
+      type: mongoose.SchemaTypes.ObjectId, ref: 'labels'
+    }
+  ],
   planing: {
     type: mongoose.SchemaTypes.Array, ref: 'planings'
   },

@@ -1,3 +1,5 @@
+const { populate } = require("../mode/customer/member")
+
 module.exports = {
   insert(collectionName, insertData) {
     return new Promise((resolve, reject) => {
@@ -14,7 +16,6 @@ module.exports = {
   },
   deletes(collectionName, deleteData, deleteType = 'deleteOne') {
     return new Promise((resolve, reject) => {
-      console.log(deleteType)
       collectionName[deleteType](deleteData, (err) => {
         if (err) throw err
         resolve()
