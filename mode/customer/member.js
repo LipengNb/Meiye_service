@@ -28,9 +28,16 @@ const memberScheme = new Scheme({
   planing: {
     type: mongoose.SchemaTypes.Array, ref: 'planings'
   },
-  records: {
-    type: mongoose.SchemaTypes.Array, ref: 'records'
-  },
+  records: [{
+    discount: String,
+    price: String,
+    lastConsume: String,
+    product: String,
+    person: {
+      type: mongoose.SchemaTypes.ObjectId, ref: 'staff'
+    },
+    remarks: String
+  }],
   remark: String,
   create_time: {
     type: Date,

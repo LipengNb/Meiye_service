@@ -17,14 +17,14 @@ route.get('/admin/member/list', async (req, res) => {
 route.post('/admin/member/cards', async (req, res) => {
   const body = req.body
   const _id = body._id
-  const payment = await find(memberModel, { _id: _id }, 'payment')
+  const member = await find(memberModel, { _id: _id })
   const dis = body.lastConsume
-  await update(memberModel, { _id: _id }, { payment: payment[0].payment - dis, lastConsume: dis })  
-  // res.send({
-  //   code: 200,
-  //   data: result,
-  //   message: 'success'
-  // })
+  await update(memberModel, { _id: _id }, { payment: member[0].payment - dis, lastConsume: dis, records:  member[0].records.concat([body]) })  
+  res.send({
+    code: 200,
+    data: result,
+    message: 'success'
+  })
 })
 // 录入会员
 route.post('/admin/member/insert', async(req, res) => {
