@@ -28,16 +28,40 @@ const memberScheme = new Scheme({
   planing: {
     type: mongoose.SchemaTypes.Array, ref: 'planings'
   },
-  records: [{
-    discount: String,
-    price: String,
-    lastConsume: String,
-    product: String,
-    person: {
-      type: mongoose.SchemaTypes.ObjectId, ref: 'staff'
-    },
-    remarks: String
-  }],
+  records: [
+    {
+      _id: Number,
+      memberId: {
+        type: String,
+        required: [true, '会员ID']
+      },
+      orig: {
+        type: String,
+        required: [true, '原价']
+      },
+      sale: {
+        type: String,
+        required: [true, '折后金额']
+      },
+      balance: {
+        type: String,
+        required: [true, '余额']
+      },
+      product: {
+        type: String,
+        required: [true, '项目']
+      },
+      staff: {
+        type: String,
+        required: [true, '职员']
+      },
+      remarks: String,
+      create_time: {
+        type: Date,
+        default: Date.now()
+      }
+    }
+  ],
   remark: String,
   create_time: {
     type: Date,

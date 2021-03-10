@@ -6,7 +6,7 @@ const { insert, find, deletes, update } = require('../crud')
 const route = express.Router()
 // 会员列表
 route.get('/admin/member/list', async (req, res) => {
-  const result = await memberModel.find().populate('discount').populate('labels')
+  const result = await memberModel.find(req.query).populate('discount').populate('labels')
   res.send({
     code: 200,
     data: result,
@@ -16,13 +16,23 @@ route.get('/admin/member/list', async (req, res) => {
 // 消费
 route.post('/admin/member/cards', async (req, res) => {
   const body = req.body
-  const _id = body._id
-  const member = await find(memberModel, { _id: _id })
-  const dis = body.lastConsume
-  await update(memberModel, { _id: _id }, { payment: member[0].payment - dis, lastConsume: dis, records:  member[0].records.concat([body]) })  
+  const memberId = body.memberId
+  // 查询当前用户
+  const member = await find(memberModel, { _id: memberId })
+  // 折后的金额
+  const sale = body.sale
+  // 余额
+  const balance = member[0].payment - sale
+  const params = {
+    ...body,
+    balance: balance,
+    _id: member[0].records.length
+  }
+  const records = member[0].records.concat(params)
+  // 更新会员账户
+  await update(memberModel, { _id: memberId }, { payment: balance, lastConsume: sale, records: records })
   res.send({
     code: 200,
-    data: result,
     message: 'success'
   })
 })
